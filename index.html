@@ -93,6 +93,27 @@
   .habitgrid div{ background:rgba(15,11,10,0.72); backdrop-filter:blur(5px); border:1px solid var(--line); border-radius:6px; padding:15px 17px; font-size:15px; font-weight:500; display:flex; gap:12px; align-items:baseline; }
   .habitgrid div .b{ color:var(--wine-pale); font-weight:700; }
 
+  /* how we keep it on track */
+  .mech{ display:flex; gap:16px; margin-top:24px; flex-wrap:wrap; max-width:1000px; }
+  .mech > div{ flex:1; min-width:250px; background:rgba(18,13,12,0.8); backdrop-filter:blur(6px); border:1px solid var(--line); border-top:3px solid var(--wine); border-radius:6px; padding:18px 20px; }
+  .mech > div b{ font-family:'Playfair Display',serif; font-size:17px; display:block; margin-bottom:8px; color:var(--ink); }
+  .mech > div span{ font-size:13.5px; color:var(--muted); line-height:1.55; }
+
+  /* who you would be working with */
+  .people{ display:flex; gap:16px; margin-top:22px; flex-wrap:wrap; max-width:1000px; }
+  .people > div{ flex:1; min-width:230px; background:rgba(18,13,12,0.8); backdrop-filter:blur(6px); border:1px solid var(--line); border-radius:6px; padding:18px 20px; }
+  .people .nm{ font-family:'Playfair Display',serif; font-size:19px; color:var(--ink); }
+  .people .rl{ font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--wine-pale); font-weight:600; margin:4px 0 9px; }
+  .people .ds{ font-size:13.5px; color:var(--muted); line-height:1.55; }
+
+  /* executive summary six answers */
+  .sixgrid{ margin-top:20px; max-width:980px; }
+  .sixgrid > div{ display:flex; gap:16px; padding:11px 0; border-bottom:1px solid var(--line); font-size:14.5px; line-height:1.5; align-items:baseline; }
+  .sixgrid > div:first-child{ border-top:1px solid var(--line); }
+  .sixgrid .q{ color:var(--wine-pale); font-weight:600; min-width:170px; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; }
+  .sixgrid .a{ color:var(--ink); }
+  .sixgrid .a b{ font-weight:600; }
+
   /* next step */
   .nextlist{ margin-top:22px; max-width:720px; }
   .nextlist div{ display:flex; gap:16px; padding:13px 0; border-bottom:1px solid var(--line); font-size:16px; align-items:baseline; }
@@ -155,12 +176,32 @@
     <div class="kicker-row">
       <div><b>Process</b> simpler, less done twice</div>
       <div><b>AI</b> practical, and safe</div>
-      <div><b>Numbers</b> one version everyone trusts</div>
+      <div><b>Numbers</b> with one agreed meaning</div>
       <div><b>Your team</b> trained to carry it</div>
     </div>
     <div class="prep"><b>Andrew Demczuk</b>, your contact &middot; Angel Software Solutions &middot; July 2026</div>
   </div>
-  <div class="foot"><span>Top Spirit &middot; a plan for the leadership team</span><span class="num">01 / 11</span></div>
+  <div class="foot"><span>Top Spirit &middot; a plan for the leadership team</span><span class="num">01 / 15</span></div>
+</section>
+
+<!-- 2 · The short version (executive summary) -->
+<section class="slide">
+  <img class="bgimg" src="media/gen/hero.png" alt="" aria-hidden="true">
+  <div class="scrim scrim-l"></div>
+  <div class="content">
+    <div class="eyebrow">The short version</div>
+    <h2>You asked six questions. <span class="accent">This page is the six answers.</span></h2>
+    <div class="sixgrid">
+      <div><span class="q">Simpler processes</span><span class="a">We map how the work runs today and remove the steps done twice by hand.</span></div>
+      <div><span class="q">Where the potential sits</span><span class="a">We look across order handling, sales, finance, logistics and admin, and rank every opportunity by value against effort.</span></div>
+      <div><span class="q">Quick value from AI</span><span class="a">Drafting, reporting and list clean-up: small wins first, each proven in your own numbers.</span></div>
+      <div><span class="q">The right tools</span><span class="a">We start inside the Microsoft 365 you already use. Anything new must earn its place first.</span></div>
+      <div><span class="q">Safe, with your people</span><span class="a">A person you name approves every AI output, and every team is trained on its own real work.</span></div>
+      <div><span class="q">The way there</span><span class="a">Four phases, from a potential analysis to your team running it without us.</span></div>
+    </div>
+    <p class="caption"><strong>The first step is a short potential analysis, about four to six weeks.</strong> Before that, one meeting: you describe your situation, and we show a working dashboard preview live.</p>
+  </div>
+  <div class="foot"><span>The short version</span><span class="num">02 / 15</span></div>
 </section>
 
 <!-- 2 · Today to destination -->
@@ -176,15 +217,15 @@
         <h4>Today</h4>
         <ul><li>Work built by hand, again and again</li><li>Know-how living in a few people's heads</li><li>Numbers that differ between meetings</li><li>Unsure where AI actually fits</li></ul>
       </div>
-      <div class="baarrow">&#10142;</div>
+      <div class="baarrow" aria-hidden="true"><svg width="30" height="18" viewBox="0 0 30 18"><path d="M0 9 H24 M18 2 L26 9 L18 16" fill="none" stroke="#b6434f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="bacol future">
         <h4>Where this goes</h4>
-        <ul><li>Routine work drafted, then checked by your people</li><li>Know-how written down and shared</li><li>One agreed set of numbers</li><li>A team confident using AI on real work</li></ul>
+        <ul><li>Routine work drafted, then checked by your people</li><li>Know-how written down and shared</li><li>Numbers with one agreed meaning</li><li>A team confident using AI on real work</li></ul>
       </div>
     </div>
-    <p class="caption">Nothing here is a leap. A set of small, safe steps, each one proven before the next.</p>
+    <p class="caption">The left side is what companies at this stage usually tell us; you tell us which of these ring true. Nothing here is a leap: small, safe steps, each one proven before the next.</p>
   </div>
-  <div class="foot"><span>The outcome</span><span class="num">02 / 11</span></div>
+  <div class="foot"><span>The outcome</span><span class="num">03 / 15</span></div>
 </section>
 
 <!-- 3 · The roadmap (visual) -->
@@ -202,7 +243,7 @@
       <div class="phase"><div class="n">4</div><h3>Embed</h3><p>Your team runs it, we step back and stay on call.</p></div>
     </div>
   </div>
-  <div class="foot"><span>The roadmap</span><span class="num">03 / 11</span></div>
+  <div class="foot"><span>The roadmap</span><span class="num">04 / 15</span></div>
 </section>
 
 <!-- 4 · Potential -->
@@ -214,6 +255,7 @@
       <p class="lede dim">We do not assume where your time goes. You show us how the work really runs, and we look across the business for where simpler processes and AI would help most.</p>
       <div class="chips" style="margin-top:22px">
         <div class="chip"><b>Where we look</b><span>Order handling, reporting, customer data, logistics, finance and admin. Confirmed with you, not assumed.</span></div>
+        <div class="chip"><b>What you receive</b><span>A map of how the work runs today, a ranked list of opportunities with the saving each carries, and the plan for the first quick win. About four to six weeks.</span></div>
       </div>
       <div class="diagram" role="img" aria-label="Three step method: map how the work really flows, then find the steps done twice by hand, then rank each opportunity by value against effort.">
         <svg viewBox="0 0 900 92">
@@ -229,34 +271,53 @@
     </div>
     <div class="col-fig"><div class="figframe"><img src="media/gen/potential.png" alt="Abstract network being analyzed"></div></div>
   </div>
-  <div class="foot"><span>Finding the potential</span><span class="num">04 / 11</span></div>
+  <div class="foot"><span>Finding the potential</span><span class="num">05 / 15</span></div>
 </section>
 
-<!-- 5 · Quick wins + tools -->
+<!-- 6 · Quick wins -->
 <section class="slide">
   <div class="content split">
     <div class="col-main">
-      <div class="eyebrow">Phase 2 &middot; Quick wins and the right tools</div>
-      <h2>Value in weeks, with <span class="accent">tools you likely already have</span></h2>
+      <div class="eyebrow">Phase 2 &middot; Quick wins</div>
+      <h2>Where AI helps <span class="accent">in your first weeks</span></h2>
+      <p class="lede dim">A few honest examples of the small, low-risk work we start with. Each one is checked by a person before anything goes out.</p>
       <div class="panels">
         <div><div class="panel">
-          <h3><small>Where AI helps first</small>A few honest examples</h3>
+          <h3><small>Where AI helps first</small>Small, real, checked</h3>
           <div class="rowitem"><span class="b">01</span>Draft routine emails and order replies for a person to check</div>
           <div class="rowitem"><span class="b">02</span>Pull a monthly report together from your own files</div>
           <div class="rowitem"><span class="b">03</span>Summarize long documents and supplier terms in plain language</div>
           <div class="rowitem"><span class="b">04</span>Clean up and de-duplicate a customer or product list</div>
         </div></div>
-        <div><div class="panel">
-          <h3><small>Which tools make sense</small>Start with what you own</h3>
-          <p class="toolnote">For a company your size the practical start is usually the <b>Microsoft tools you likely already pay for</b>: Microsoft 365 with Copilot for everyday drafting, and <b>Power BI for reporting</b>.</p>
-          <p class="toolnote">We confirm what you actually run in Phase 1, and bring in a new tool only where it clearly earns its place. <b>No shelf of software you never use.</b></p>
-        </div></div>
       </div>
-      <p class="caption"><strong>Quick wins pay for the deeper work.</strong> We prove the hours saved on something small before anyone commits to more.</p>
+      <p class="caption"><strong>We prove the hours saved on something small,</strong> measured in your own numbers, before anyone commits to more.</p>
     </div>
     <div class="col-fig" style="flex:0.8"><div class="figframe" style="aspect-ratio:3/4"><img src="media/gen/quickwins.png" alt="Rising sparks of early momentum"></div></div>
   </div>
-  <div class="foot"><span>Quick wins and tools</span><span class="num">05 / 11</span></div>
+  <div class="foot"><span>Quick wins</span><span class="num">06 / 15</span></div>
+</section>
+
+<!-- 7 · The tools -->
+<section class="slide">
+  <div class="content split">
+    <div class="col-main">
+      <div class="eyebrow">Phase 2 &middot; Which tools make sense</div>
+      <h2>We start with the tools <span class="accent">you already own</span></h2>
+      <p class="lede dim">Your fourth question was which tools make sense. The honest answer for a company your size: begin with what is already in the house, and let anything new earn its place.</p>
+      <div class="panels">
+        <div><div class="panel">
+          <h3><small>Already in the house</small>Enough to start</h3>
+          <p class="toolnote">You already run <b>Microsoft 365</b>. Copilot Chat is included at no extra cost for everyday drafting, and <b>Power BI Desktop is free</b> for building the first reports. That covers the early work without a single new license.</p>
+        </div></div>
+        <div><div class="panel">
+          <h3><small>Everything else</small>Must earn its place</h3>
+          <p class="toolnote">We confirm what you actually run in Phase 1. A new tool comes in <b>only where it clearly pays for itself</b>, with the case made first. No shelf of software you never use.</p>
+        </div></div>
+      </div>
+    </div>
+    <div class="col-fig" style="flex:0.8"><div class="figframe" style="aspect-ratio:3/4"><img src="media/gen/tools.png" alt="A small set of precise glowing instruments on a dark surface"></div></div>
+  </div>
+  <div class="foot"><span>The tools</span><span class="num">07 / 15</span></div>
 </section>
 
 <!-- 6 · Safe -->
@@ -279,12 +340,12 @@
       </svg>
     </div>
     <div class="chips">
-      <div class="chip"><b>Your data stays home</b><span>It only enters tools your own IT has approved.</span></div>
+      <div class="chip"><b>Your data stays under your control</b><span>It only enters tools your own IT has approved.</span></div>
       <div class="chip"><b>GDPR respected</b><span>You stay the data controller. We work to your rules.</span></div>
       <div class="chip"><b>People, not around them</b><span>We train with your teams, so they trust it and use it.</span></div>
     </div>
   </div>
-  <div class="foot"><span>Safe by design</span><span class="num">06 / 11</span></div>
+  <div class="foot"><span>Safe by design</span><span class="num">08 / 15</span></div>
 </section>
 
 <!-- 7 · Training timeline -->
@@ -310,15 +371,16 @@
         <g text-anchor="middle"><rect x="150" y="156" width="700" height="40" rx="20" fill="rgba(15,11,10,0.85)" stroke="#3f2f2b" stroke-width="1.5"/><text x="500" y="181" font-size="13.5" fill="#f5efe9">Order desk &#183; Sales &#183; Finance &#183; Logistics &#183; Leadership</text></g>
       </svg>
     </div>
+    <p class="caption"><strong>The time ask is small on purpose:</strong> about an hour a week per person, inside normal work. This is the typical shape; the real calendar is set with you. And EU rules already expect some AI training in every company whose staff use AI tools, so a right-sized program like this quietly covers that too.</p>
   </div>
-  <div class="foot"><span>Training &middot; the shape</span><span class="num">07 / 11</span></div>
+  <div class="foot"><span>Training &middot; the shape</span><span class="num">09 / 15</span></div>
 </section>
 
 <!-- 8 · Connected not siloed -->
 <section class="slide">
   <div class="content">
-    <div class="eyebrow">AI literacy &middot; the network</div>
-    <h2>Connected, <span class="accent">not siloed</span></h2>
+    <div class="eyebrow">AI literacy &middot; connected, not siloed</div>
+    <h2>What one team learns <span class="accent">reaches the others</span></h2>
     <p class="lede dim">Today, what one team learns tends to stay in that team. The training is built to break that pattern, so a good idea in one department reaches the others.</p>
     <div class="diagram" role="img" aria-label="Left: five separate department boxes learning alone. Right: the same five in a ring around a shared playbook, each with a champion, one trained person per department carrying what works across teams.">
       <svg viewBox="0 0 1000 340">
@@ -348,7 +410,7 @@
       </svg>
     </div>
   </div>
-  <div class="foot"><span>Training &middot; the network</span><span class="num">08 / 11</span></div>
+  <div class="foot"><span>Training &middot; the network</span><span class="num">10 / 15</span></div>
 </section>
 
 <!-- 9 · Habit loop (image-led) -->
@@ -367,7 +429,7 @@
     </div>
     <p class="caption"><strong>What stays with you:</strong> the playbook, the champions, and the habit. What leaves: the need for us.</p>
   </div>
-  <div class="foot"><span>Training &middot; the habit</span><span class="num">09 / 11</span></div>
+  <div class="foot"><span>Training &middot; the habit</span><span class="num">11 / 15</span></div>
 </section>
 
 <!-- 10 · Analytics -->
@@ -377,7 +439,7 @@
   <div class="content">
     <div class="eyebrow">Phase 3 &middot; The system analytics</div>
     <h2>From files everywhere to <span class="accent">one set of numbers</span></h2>
-    <p class="lede" style="max-width:820px">Whatever systems and spreadsheets you use today, they already hold the data. We turn their files into dashboards, with one agreed meaning for every number.</p>
+    <p class="lede" style="max-width:820px">Whatever systems and spreadsheets you use today, they usually already hold most of what we need. We check that first, in Phase 1, then turn their files into dashboards, with one agreed meaning for every number.</p>
     <div class="diagram" role="img" aria-label="A pipeline: the systems and files you use today flow into export files (simple safe copies), then one shared glossary where each number has one agreed meaning, then dashboards your team keeps current, ending in clear decisions.">
       <svg viewBox="0 0 1000 130">
         <defs><marker id="aa" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#b6434f"/></marker></defs>
@@ -393,21 +455,56 @@
     </div>
     <p class="caption"><strong>Which report we start with, we choose together</strong> in the meeting. Then one more at a time, each proven before the next.</p>
   </div>
-  <div class="foot"><span>The analytics</span><span class="num">10 / 11</span></div>
+  <div class="foot"><span>The analytics</span><span class="num">12 / 15</span></div>
 </section>
 
-<!-- 11 · Next step -->
+<!-- 13 · How we keep it on track -->
+<section class="slide">
+  <img class="bgimg" src="media/gen/track.png" alt="" aria-hidden="true">
+  <div class="scrim scrim-l"></div>
+  <div class="content">
+    <div class="eyebrow">How we keep it on track</div>
+    <h2>The reason these plans work <span class="accent">is rarely the technology</span></h2>
+    <p class="lede">Across repeated studies, roughly seven in ten programs like this miss their goals, and the cause is almost always people and change, not the tools. So the way we run the work is built around that.</p>
+    <div class="mech">
+      <div><b>A checkpoint you sign off</b><span>Before each phase begins, you approve the last one. Nothing moves forward, and no budget is spent, without your yes.</span></div>
+      <div><b>We measure before we change</b><span>We record how long the work takes today, so every saving later is provable in your own numbers, not asserted.</span></div>
+      <div><b>One owner each side, nothing hidden</b><span>One named person on your side, one on ours, and an open list of what could go wrong that we review together.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>How we keep it on track</span><span class="num">13 / 15</span></div>
+</section>
+
+<!-- 14 · Who you would be working with -->
+<section class="slide">
+  <img class="bgimg photo" src="media/close-team.jpg" alt="" aria-hidden="true">
+  <div class="scrim scrim-l"></div>
+  <div class="content">
+    <div class="eyebrow">Who you would be working with</div>
+    <h2>A small senior team, <span class="accent">and we would rather show than claim</span></h2>
+    <p class="lede">Angel Software Solutions is a small firm built for exactly this kind of work: bringing AI and better process into companies that are just starting out. You would work with the people who do the work, not a handover to juniors.</p>
+    <div class="people">
+      <div><div class="nm">Andrew Demczuk</div><div class="rl">Your contact, in Vienna</div><div class="ds">Runs the engagement, the analysis, and the training on the ground.</div></div>
+      <div><div class="nm">Keith Swoger</div><div class="rl">Chief Executive</div><div class="ds">Sets how we deliver and stands behind the commitment to you.</div></div>
+      <div><div class="nm">Will Humphries</div><div class="rl">Chief Technology</div><div class="ds">Depth on the build and the data, pulled in where a piece of work needs it.</div></div>
+    </div>
+    <p class="caption"><strong>Our proof is the work itself.</strong> In the meeting you see a working dashboard preview, live, and the first step is small enough to judge us by it. Gespraech, Schulungen und Unterlagen gerne auch auf Deutsch.</p>
+  </div>
+  <div class="foot"><span>Who we are</span><span class="num">14 / 15</span></div>
+</section>
+
+<!-- 15 · Next step -->
 <section class="slide">
   <img class="bgimg photo" src="media/meeting.jpg" alt="" aria-hidden="true">
   <div class="scrim scrim-l"></div>
   <div class="content">
-    <div class="eyebrow">How we work, and the first step</div>
+    <div class="eyebrow">The next step</div>
     <h2>A first meeting <span class="accent">to get to know each other</span></h2>
-    <p class="lede">You describe your situation, your challenges, and your goals. We bring this roadmap and a working preview you can see live. From there, three things to agree together:</p>
+    <p class="lede">You describe your situation, your challenges, and your goals. We bring this roadmap and a working dashboard preview you can see live. Three questions we would bring, to talk through together, not to decide on the spot:</p>
     <div class="nextlist">
-      <div><span>1</span>Which area we look at first in the potential analysis.</div>
-      <div><span>2</span>Which report becomes the first dashboard.</div>
-      <div><span>3</span>Who your champions are, one per team.</div>
+      <div><span>1</span>Where should we look first in the potential analysis?</div>
+      <div><span>2</span>Which report would help most as the first dashboard?</div>
+      <div><span>3</span>Who might your natural go-to people be, one per team?</div>
     </div>
     <div class="bring">
       <div><b>What we bring</b><span>The roadmap, a working dashboard preview, and our way of working, shown not just described.</span></div>
@@ -415,7 +512,7 @@
     </div>
     <div class="contact"><b>Andrew Demczuk</b>, your contact &middot; Angel Software Solutions &middot; with Keith Swoger and Will Humphries</div>
   </div>
-  <div class="foot"><span>The next step</span><span class="num">11 / 11</span></div>
+  <div class="foot"><span>The next step</span><span class="num">15 / 15</span></div>
 </section>
 
 <nav class="nav" id="dots" aria-label="Slide navigation"></nav>
