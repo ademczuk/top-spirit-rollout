@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top Spirit: A Plan for Working Smarter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f4; --card:#ffffff; --ink:#241d1f; --muted:#6e6266;
+    --wine:#8b2e38; --wine-bright:#b6434f; --wine-pale:#f3e2e4;
+    --sand:#e9e0d4; --sand-deep:#d8cbb8; --line:#e3dacd;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--paper); color:var(--ink); font-family:'Inter',system-ui,sans-serif; }
+  .slide{ min-height:100vh; display:none; flex-direction:column; justify-content:center; padding:64px 7vw 88px; position:relative; }
+  .slide.active{ display:flex; }
+  h1,h2{ font-family:'Fraunces',Georgia,serif; font-weight:700; letter-spacing:-0.01em; }
+  h1{ font-size:clamp(40px,5.4vw,68px); line-height:1.06; }
+  h2{ font-size:clamp(30px,3.6vw,44px); line-height:1.12; margin-bottom:10px; }
+  .accent{ color:var(--wine); }
+  .eyebrow{ font-size:12.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--wine); font-weight:600; margin-bottom:18px; display:flex; align-items:center; gap:12px; }
+  .eyebrow::before{ content:""; width:34px; height:2px; background:var(--wine); display:inline-block; }
+  .lede{ font-size:clamp(16px,1.5vw,19px); color:var(--muted); max-width:760px; line-height:1.55; margin-top:14px; }
+  .foot{ position:absolute; left:7vw; right:7vw; bottom:26px; display:flex; justify-content:space-between; font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase; color:#a29a90; }
+  .foot .num{ color:var(--wine); font-weight:600; }
+  .diagram{ margin-top:34px; width:100%; }
+  .diagram svg{ width:100%; height:auto; max-height:48vh; display:block; margin-inline:auto; }
+  @media screen{ .foot .num{ margin-right:96px; } }
+  svg text{ font-family:'Inter',system-ui,sans-serif; fill:var(--ink); }
+  .caption{ margin-top:16px; font-size:14.5px; color:var(--muted); }
+  .caption strong{ color:var(--ink); }
+
+  /* title slide */
+  .titlewrap{ max-width:900px; }
+  .brandline{ font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); margin-bottom:26px; }
+  .brandline b{ color:var(--wine); font-weight:600; }
+  .agenda{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
+  .agenda div{ background:var(--card); border:1px solid var(--line); border-top:3px solid var(--wine); padding:16px 20px; font-size:15px; font-weight:500; flex:1; min-width:200px; }
+  .agenda div small{ display:block; color:var(--muted); font-weight:400; margin-top:6px; font-size:13.5px; line-height:1.45; }
+  .prep{ margin-top:36px; font-size:14.5px; color:var(--muted); line-height:1.7; }
+  .prep b{ color:var(--ink); font-weight:600; }
+
+  /* three streams */
+  .streams{ display:flex; gap:18px; margin-top:36px; flex-wrap:wrap; }
+  .stream{ flex:1; min-width:230px; background:var(--card); border:1px solid var(--line); padding:26px 24px 22px; position:relative; }
+  .stream::before{ content:""; position:absolute; top:0; left:0; width:100%; height:4px; background:var(--wine); }
+  .stream h3{ font-family:'Fraunces',Georgia,serif; font-size:22px; margin-bottom:10px; min-height:54px; }
+  .stream p{ font-size:14.5px; color:var(--muted); line-height:1.55; }
+  .stream .tag{ display:inline-block; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--wine); font-weight:600; margin-bottom:12px; }
+  .goalbar{ margin-top:22px; background:var(--wine); color:#fff; padding:16px 22px; font-size:15.5px; display:flex; align-items:center; gap:14px; }
+  .goalbar::before{ content:"→"; font-size:20px; }
+
+  /* next step slide */
+  .nextlist{ margin-top:30px; max-width:720px; }
+  .nextlist div{ display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:16.5px; align-items:baseline; }
+  .nextlist div:first-child{ border-top:1px solid var(--line); }
+  .nextlist span{ color:var(--wine); font-weight:600; font-size:14px; min-width:22px; }
+  .contact{ margin-top:34px; font-size:14.5px; color:var(--muted); line-height:1.7; }
+  .contact b{ color:var(--ink); }
+
+  /* nav */
+  .nav{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:9px; z-index:20; }
+  .dot{ width:9px; height:9px; border-radius:50%; background:var(--sand-deep); border:none; cursor:pointer; padding:0; transition:background .2s; }
+  .dot.on{ background:var(--wine); }
+  .dot:focus-visible{ outline:1.5px solid var(--wine); outline-offset:3px; }
+  .arrows{ position:fixed; right:26px; bottom:16px; z-index:20; display:flex; gap:6px; }
+  .arrows button{ background:var(--card); color:var(--ink); border:1px solid var(--sand-deep); font-size:16px; width:38px; height:38px; cursor:pointer; transition:all .2s; }
+  .arrows button:hover,.arrows button:focus-visible{ border-color:var(--wine); color:var(--wine); outline:none; }
+  .hint{ position:fixed; right:28px; top:26px; z-index:20; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#b3aaa0; transition:opacity .6s; }
+
+  @media print{
+    @page{ size:A4 landscape; margin:0; }
+    html,body,.slide,svg,*{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .nav,.arrows,.hint{ display:none !important; }
+    .slide{ display:flex !important; min-height:100vh; page-break-after:always; break-after:page; }
+    .slide:last-of-type{ page-break-after:auto; break-after:auto; }
+    *{ text-shadow:none !important; box-shadow:none !important; }
+  }
+  @media (max-width:760px){
+    .slide{ padding:48px 6vw 84px; }
+    .foot{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 · Title -->
+<section class="slide active">
+  <div class="titlewrap">
+    <div class="brandline"><b>TOP SPIRIT</b> &middot; A PLAN PREPARED BY ANGEL SOFTWARE SOLUTIONS &middot; JULY 2026</div>
+    <h1>Working smarter<br>at <span class="accent">Top Spirit</span></h1>
+    <p class="lede">How your team learns to use AI on everyday work, how the numbers become clear, and what the rollout looks like, step by step.</p>
+    <div class="agenda">
+      <div>What we would do<small>Three streams of work, one goal: time back for your team and your customers.</small></div>
+      <div>How we work<small>One safe loop for every task. Your people approve everything.</small></div>
+      <div>The rollout<small>Training that connects your departments, and dashboards everyone trusts.</small></div>
+    </div>
+    <div class="prep"><b>Andrew Demczuk</b> &middot; your contact &middot; Angel Software Solutions LLC</div>
+  </div>
+  <div class="foot"><span>Top Spirit &middot; Angel Software Solutions</span><span class="num">01 / 08</span></div>
+</section>
+
+<!-- 2 · What we would do -->
+<section class="slide">
+  <div class="eyebrow">What we would do</div>
+  <h2>Three streams of work, <span class="accent">one goal</span></h2>
+  <div class="streams">
+    <div class="stream"><span class="tag">People</span><h3>AI training for every team</h3><p>Small groups practice on their own weekly tasks. Each person gets faster at real work, not theory.</p></div>
+    <div class="stream"><span class="tag">Process</span><h3>Less double work</h3><p>We map how orders, invoices, and stock really flow, then remove the steps done twice by hand.</p></div>
+    <div class="stream"><span class="tag">Numbers</span><h3>Dashboards everyone trusts</h3><p>One agreed meaning per number, and reports that update themselves from your files instead of by hand.</p></div>
+  </div>
+  <div class="goalbar">Time back for your team and your customers, and know-how that stays in the company.</div>
+  <div class="foot"><span>The work</span><span class="num">02 / 08</span></div>
+</section>
+
+<!-- 3 · How we work -->
+<section class="slide">
+  <div class="eyebrow">How we work</div>
+  <h2>Every task follows the same <span class="accent">safe loop</span></h2>
+  <p class="lede">AI writes the first draft. A person you name approves it. Nothing reaches a customer or the books unchecked.</p>
+  <div class="diagram" role="img" aria-label="Five step loop: look at the work, cut the double work, AI writes the draft, your person approves, count the hours saved, then repeat with the next task.">
+    <svg viewBox="0 0 1000 205">
+      <defs>
+        <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#8b2e38"/></marker>
+      </defs>
+      <!-- boxes -->
+      <g font-size="14.5" font-weight="500" text-anchor="middle">
+        <rect x="10"  y="40" width="168" height="64" rx="10" fill="#ffffff" stroke="#d8cbb8" stroke-width="1.5"/>
+        <text x="94" y="68">Look at the</text><text x="94" y="87">work together</text>
+        <rect x="216" y="40" width="168" height="64" rx="10" fill="#ffffff" stroke="#d8cbb8" stroke-width="1.5"/>
+        <text x="300" y="68">Cut the steps</text><text x="300" y="87">done twice</text>
+        <rect x="422" y="40" width="168" height="64" rx="10" fill="#ffffff" stroke="#d8cbb8" stroke-width="1.5"/>
+        <text x="506" y="68">AI writes</text><text x="506" y="87">the first draft</text>
+        <rect x="628" y="40" width="168" height="64" rx="10" fill="#8b2e38"/>
+        <text x="712" y="68" style="fill:#ffffff" font-weight="600">Your person</text><text x="712" y="87" style="fill:#ffffff" font-weight="600">approves it</text>
+        <rect x="834" y="40" width="158" height="64" rx="10" fill="#ffffff" stroke="#d8cbb8" stroke-width="1.5"/>
+        <text x="913" y="68">Count the</text><text x="913" y="87">hours saved</text>
+      </g>
+      <!-- arrows between -->
+      <g stroke="#8b2e38" stroke-width="2" fill="none">
+        <line x1="180" y1="72" x2="211" y2="72" marker-end="url(#ah)"/>
+        <line x1="386" y1="72" x2="417" y2="72" marker-end="url(#ah)"/>
+        <line x1="592" y1="72" x2="623" y2="72" marker-end="url(#ah)"/>
+        <line x1="798" y1="72" x2="829" y2="72" marker-end="url(#ah)"/>
+      </g>
+      <!-- loop back -->
+      <path d="M 913 106 L 913 152 L 94 152 L 94 112" stroke="#c9a3a8" stroke-width="2" fill="none" stroke-dasharray="5 6" marker-end="url(#ah)"/>
+      <text x="503" y="176" text-anchor="middle" font-size="13.5" fill="#6e6266">then the next task, a little bigger each time</text>
+    </svg>
+  </div>
+  <p class="caption"><strong>The rule never changes:</strong> anything that touches money, prices, or customers is approved by a person first.</p>
+  <div class="foot"><span>The method</span><span class="num">03 / 08</span></div>
+</section>
+
+<!-- 4 · Training timeline -->
+<section class="slide">
+  <div class="eyebrow">The training rollout &middot; 1 of 3</div>
+  <h2>Week by week, <span class="accent">on real work</span></h2>
+  <p class="lede">No classroom theory. Every session uses tasks your people already do, so the time invested comes straight back.</p>
+  <div class="diagram" role="img" aria-label="Timeline over thirteen weeks: weeks one and two set the ground rules, weeks three to eight are small group practice, weeks nine to thirteen are everyday use with results reviews.">
+    <svg viewBox="0 0 1000 230">
+      <!-- baseline segments -->
+      <line x1="40" y1="100" x2="285" y2="100" stroke="#d8a7ad" stroke-width="7" stroke-linecap="round"/>
+      <line x1="285" y1="100" x2="700" y2="100" stroke="#b6434f" stroke-width="7" stroke-linecap="round"/>
+      <line x1="700" y1="100" x2="960" y2="100" stroke="#8b2e38" stroke-width="7" stroke-linecap="round"/>
+      <!-- ticks -->
+      <g stroke="#241d1f" stroke-width="1.5">
+        <line x1="40" y1="90" x2="40" y2="110"/><line x1="285" y1="90" x2="285" y2="110"/>
+        <line x1="700" y1="90" x2="700" y2="110"/><line x1="960" y1="90" x2="960" y2="110"/>
+      </g>
+      <g font-size="12.5" fill="#6e6266" text-anchor="middle">
+        <text x="40" y="130">Week 1</text><text x="285" y="130">Week 3</text><text x="700" y="130">Week 9</text><text x="960" y="130">Week 13</text>
+      </g>
+      <!-- phase titles above -->
+      <g text-anchor="middle">
+        <text x="162" y="46" font-size="17" font-weight="600">Ground rules</text>
+        <text x="162" y="68" font-size="13.5" fill="#6e6266">what goes into AI tools,</text>
+        <text x="162" y="84" font-size="13.5" fill="#6e6266">and what never does</text>
+        <text x="492" y="46" font-size="17" font-weight="600">Practice in small groups</text>
+        <text x="492" y="68" font-size="13.5" fill="#6e6266">each team trains on its own</text>
+        <text x="492" y="84" font-size="13.5" fill="#6e6266">weekly tasks, with us beside them</text>
+        <text x="830" y="46" font-size="17" font-weight="600">Everyday use</text>
+        <text x="830" y="68" font-size="13.5" fill="#6e6266">results on the table,</text>
+        <text x="830" y="84" font-size="13.5" fill="#6e6266">next tasks chosen by the teams</text>
+      </g>
+      <!-- departments strip -->
+      <g font-size="13.5" text-anchor="middle">
+        <rect x="130" y="165" width="740" height="44" rx="22" fill="#ffffff" stroke="#e3dacd" stroke-width="1.5"/>
+        <text x="500" y="192" fill="#241d1f">Order desk &#183; Sales &#183; Finance &#183; Logistics &#183; Leadership</text>
+      </g>
+    </svg>
+  </div>
+  <p class="caption"><strong>Every department takes part,</strong> including leadership. The rules come first, so nobody has to guess what is allowed.</p>
+  <div class="foot"><span>Training &middot; the shape</span><span class="num">04 / 08</span></div>
+</section>
+
+<!-- 5 · Connected, not siloed -->
+<section class="slide">
+  <div class="eyebrow">The training rollout &middot; 2 of 3</div>
+  <h2>Connected, <span class="accent">not siloed</span></h2>
+  <p class="lede">Today, what one team learns tends to stay in that team. The training is built to break that pattern.</p>
+  <div class="diagram" role="img" aria-label="Left: five separate department boxes learning alone. Right: the same five departments in a ring, each with a champion, all connected through one shared playbook in the middle.">
+    <svg viewBox="0 0 1000 356">
+      <defs><marker id="ah2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#8b2e38"/></marker></defs>
+      <!-- BEFORE: isolated boxes -->
+      <g font-size="13" text-anchor="middle">
+        <rect x="30"  y="60"  width="118" height="42" rx="8" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="89"  y="86" fill="#6e6266">Order desk</text>
+        <rect x="180" y="60"  width="118" height="42" rx="8" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="239" y="86" fill="#6e6266">Sales</text>
+        <rect x="30"  y="130" width="118" height="42" rx="8" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="89"  y="156" fill="#6e6266">Finance</text>
+        <rect x="180" y="130" width="118" height="42" rx="8" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="239" y="156" fill="#6e6266">Logistics</text>
+        <rect x="105" y="200" width="118" height="42" rx="8" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="164" y="226" fill="#6e6266">Leadership</text>
+      </g>
+      <text x="164" y="318" text-anchor="middle" font-size="14.5" font-weight="600" fill="#6e6266">Today: each team learns alone</text>
+      <!-- transition arrow -->
+      <line x1="330" y1="150" x2="415" y2="150" stroke="#8b2e38" stroke-width="2.5" marker-end="url(#ah2)"/>
+      <text x="372" y="132" text-anchor="middle" font-size="12.5" fill="#8b2e38" font-weight="600">the training</text>
+      <!-- AFTER: ring -->
+      <!-- pentagon connective ring -->
+      <path d="M 720 52 L 875 132 L 828 268 L 612 268 L 565 132 Z" fill="none" stroke="#b98d94" stroke-width="2"/>
+      <!-- spokes -->
+      <g stroke="#b6434f" stroke-width="2">
+        <line x1="720" y1="73"  x2="720" y2="140"/>
+        <line x1="852" y1="140" x2="762" y2="172"/>
+        <line x1="812" y1="252" x2="742" y2="204"/>
+        <line x1="628" y1="252" x2="698" y2="204"/>
+        <line x1="588" y1="140" x2="678" y2="172"/>
+      </g>
+      <!-- hub -->
+      <circle cx="720" cy="177" r="46" fill="#8b2e38"/>
+      <text x="720" y="172" text-anchor="middle" font-size="13" style="fill:#ffffff" font-weight="600">Shared</text>
+      <text x="720" y="189" text-anchor="middle" font-size="13" style="fill:#ffffff" font-weight="600">playbook</text>
+      <!-- nodes -->
+      <g font-size="13" text-anchor="middle">
+        <rect x="661" y="31"  width="118" height="42" rx="8" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/><text x="720" y="57">Order desk</text><circle cx="779" cy="31" r="6" fill="#b6434f"/>
+        <rect x="816" y="111" width="118" height="42" rx="8" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/><text x="875" y="137">Sales</text><circle cx="934" cy="111" r="6" fill="#b6434f"/>
+        <rect x="769" y="247" width="118" height="42" rx="8" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/><text x="828" y="273">Finance</text><circle cx="887" cy="247" r="6" fill="#b6434f"/>
+        <rect x="553" y="247" width="118" height="42" rx="8" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/><text x="612" y="273">Logistics</text><circle cx="671" cy="247" r="6" fill="#b6434f"/>
+        <rect x="506" y="111" width="118" height="42" rx="8" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/><text x="565" y="137">Leadership</text><circle cx="624" cy="111" r="6" fill="#b6434f"/>
+      </g>
+      <text x="744" y="318" text-anchor="middle" font-size="14.5" font-weight="600" fill="#241d1f">After: champions carry what works from team to team</text>
+      <!-- legend -->
+      <circle cx="562" cy="341" r="6" fill="#b6434f"/>
+      <text x="576" y="346" font-size="13" fill="#6e6266">= a champion, one trained person in every department</text>
+    </svg>
+  </div>
+  <div class="foot"><span>Training &middot; the network</span><span class="num">05 / 08</span></div>
+</section>
+
+<!-- 6 · Self-uplift -->
+<section class="slide">
+  <div class="eyebrow">The training rollout &middot; 3 of 3</div>
+  <h2>Built to keep growing <span class="accent">after our sessions end</span></h2>
+  <p class="lede">Good training makes the trainer unnecessary. The habits below keep the learning moving on its own.</p>
+  <div class="diagram" role="img" aria-label="A four step cycle: champions run a weekly open hour, wins go into the shared playbook, colleagues copy what works, new people learn from the playbook on day one, and the cycle repeats.">
+    <svg viewBox="0 0 1000 350" style="max-width:880px">
+      <defs><marker id="ah3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#8b2e38"/></marker></defs>
+      <!-- arcs -->
+      <g stroke="#8b2e38" stroke-width="2" fill="none">
+        <path d="M 610 62  A 150 118 0 0 1 682 158" marker-end="url(#ah3)"/>
+        <path d="M 668 234 A 150 118 0 0 1 607 292" marker-end="url(#ah3)"/>
+        <path d="M 390 292 A 150 118 0 0 1 320 200" marker-end="url(#ah3)"/>
+        <path d="M 330 122 A 150 118 0 0 1 392 63"  marker-end="url(#ah3)"/>
+      </g>
+      <!-- center -->
+      <text x="500" y="168" text-anchor="middle" style="font-family:'Fraunces',Georgia,serif;fill:#8b2e38" font-size="24" font-weight="700">The habit loop</text>
+      <text x="500" y="194" text-anchor="middle" font-size="14" fill="#6e6266">turns one training into a lasting skill</text>
+      <!-- nodes -->
+      <g font-size="14.5" text-anchor="middle">
+        <rect x="385" y="20" width="230" height="56" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="500" y="44" font-weight="600">Champions run a</text><text x="500" y="63" font-weight="600">weekly open hour</text>
+        <rect x="672" y="147" width="230" height="56" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="787" y="171" font-weight="600">Wins go into the</text><text x="787" y="190" font-weight="600">shared playbook</text>
+        <rect x="385" y="274" width="230" height="56" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="500" y="298" font-weight="600">Colleagues copy</text><text x="500" y="317" font-weight="600">what works</text>
+        <rect x="98" y="147" width="230" height="56" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="213" y="171" font-weight="600">New people learn from</text><text x="213" y="190" font-weight="600">the playbook, day one</text>
+      </g>
+    </svg>
+  </div>
+  <p class="caption"><strong>What stays with you:</strong> the playbook, the champions, and the habit. What leaves: the need for us.</p>
+  <div class="foot"><span>Training &middot; the habit</span><span class="num">06 / 08</span></div>
+</section>
+
+<!-- 7 · Analytics -->
+<section class="slide">
+  <div class="eyebrow">The analytics rollout</div>
+  <h2>From files everywhere to <span class="accent">one set of numbers</span></h2>
+  <p class="lede">Your systems already hold the data. We turn those files into dashboards, with one agreed meaning for every number.</p>
+  <div class="diagram" role="img" aria-label="Pipeline: SAP, CRM and Excel files flow into export files, then through one shared glossary into dashboards, ending in clear decisions in every meeting. A base bar notes it is built on export files so it works with today's system and the next one.">
+    <svg viewBox="0 0 1000 300">
+      <defs><marker id="ah4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#8b2e38"/></marker></defs>
+      <!-- sources -->
+      <g font-size="14" text-anchor="middle">
+        <rect x="20" y="22"  width="132" height="46" rx="9" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="86" y="50">SAP</text>
+        <rect x="20" y="96"  width="132" height="46" rx="9" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="86" y="124">CRM</text>
+        <rect x="20" y="170" width="132" height="46" rx="9" fill="#f1ece4" stroke="#cfc4b4" stroke-width="1.5"/><text x="86" y="198">Excel files</text>
+      </g>
+      <g stroke="#8b2e38" stroke-width="2" fill="none">
+        <path d="M 152 45  C 190 45, 200 100, 232 112" marker-end="url(#ah4)"/>
+        <line x1="152" y1="119" x2="232" y2="119" marker-end="url(#ah4)"/>
+        <path d="M 152 193 C 190 193, 200 138, 232 126" marker-end="url(#ah4)"/>
+      </g>
+      <!-- pipeline -->
+      <g font-size="14.5" text-anchor="middle">
+        <rect x="238" y="90" width="150" height="58" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="313" y="114" font-weight="600">Export files</text><text x="313" y="133" font-size="12.5" fill="#6e6266">simple, safe copies</text>
+        <rect x="446" y="90" width="188" height="58" rx="10" fill="#ffffff" stroke="#8b2e38" stroke-width="1.5"/>
+        <text x="540" y="114" font-weight="600">One glossary</text><text x="540" y="133" font-size="12.5" fill="#6e6266">each number, one meaning</text>
+        <rect x="692" y="90" width="150" height="58" rx="10" fill="#8b2e38"/>
+        <text x="767" y="114" style="fill:#ffffff" font-weight="600">Dashboards</text><text x="767" y="133" font-size="12.5" style="fill:#f3e2e4">update from your files</text>
+      </g>
+      <g stroke="#8b2e38" stroke-width="2" fill="none">
+        <line x1="388" y1="119" x2="441" y2="119" marker-end="url(#ah4)"/>
+        <line x1="634" y1="119" x2="687" y2="119" marker-end="url(#ah4)"/>
+        <line x1="842" y1="119" x2="895" y2="119" marker-end="url(#ah4)"/>
+      </g>
+      <text x="942" y="110" text-anchor="middle" font-size="15" font-weight="600">Clear decisions,</text>
+      <text x="942" y="130" text-anchor="middle" font-size="15" font-weight="600">less debate</text>
+      <!-- base bar -->
+      <rect x="20" y="242" width="960" height="42" rx="21" fill="#e9e0d4"/>
+      <text x="500" y="268" text-anchor="middle" font-size="14" fill="#241d1f">Built on export files, so it keeps working with today's system and with the next one you choose.</text>
+    </svg>
+  </div>
+  <p class="caption"><strong>Leadership sees sales, open orders, and stock on one page.</strong> The first dashboard arrives within the first weeks, then one report at a time.</p>
+  <div class="foot"><span>Analytics</span><span class="num">07 / 08</span></div>
+</section>
+
+<!-- 8 · Next step -->
+<section class="slide">
+  <div class="eyebrow">The next step</div>
+  <h2>A working meeting <span class="accent">at your office</span></h2>
+  <p class="lede">One hour with you and the team. We bring the plan and a working dashboard preview, and agree three things together:</p>
+  <div class="nextlist">
+    <div><span>1</span>Which department starts the training first.</div>
+    <div><span>2</span>Which report becomes the first dashboard.</div>
+    <div><span>3</span>Who your champions are, one per team.</div>
+  </div>
+  <div class="contact"><b>Andrew Demczuk</b>, your contact &middot; Angel Software Solutions LLC<br>Keith Swoger, CEO &middot; Will Humphries, CTO</div>
+  <div class="foot"><span>Next step</span><span class="num">08 / 08</span></div>
+</section>
+
+<nav class="nav" id="dots" aria-label="Slide navigation"></nav>
+<div class="arrows"><button id="prev" aria-label="Previous slide">&#8592;</button><button id="next" aria-label="Next slide">&#8594;</button></div>
+<div class="hint">Arrow keys or click</div>
+
+<script>
+  const slides=Array.from(document.querySelectorAll('.slide'));
+  const dots=document.getElementById('dots'); let cur=0;
+  slides.forEach((s,i)=>{ const d=document.createElement('button'); d.className='dot'; d.setAttribute('aria-label','Slide '+(i+1)); d.addEventListener('click',()=>go(i)); dots.appendChild(d); });
+  const prevBtn=document.getElementById('prev'), nextBtn=document.getElementById('next'), hint=document.querySelector('.hint');
+  function go(i){ cur=Math.max(0,Math.min(slides.length-1,i)); slides.forEach((s,j)=>s.classList.toggle('active',j===cur)); Array.from(dots.children).forEach((d,j)=>{ d.classList.toggle('on',j===cur); if(j===cur){ d.setAttribute('aria-current','true'); } else { d.removeAttribute('aria-current'); } }); prevBtn.style.opacity=(cur===0)?'0.35':'1'; nextBtn.style.opacity=(cur===slides.length-1)?'0.35':'1'; if(hint){ hint.style.opacity=(cur===0)?'1':'0'; } }
+  document.addEventListener('keydown',e=>{ if(e.target && e.target.tagName==='BUTTON' && e.key===' ')return; const k=e.key; if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); go(cur+1); } else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); go(cur-1); } else if(k==='Home'){ e.preventDefault(); go(0); } else if(k==='End'){ e.preventDefault(); go(slides.length-1); } });
+  nextBtn.addEventListener('click',()=>go(cur+1));
+  prevBtn.addEventListener('click',()=>go(cur-1));
+  go(0);
+</script>
+</body>
+</html>
