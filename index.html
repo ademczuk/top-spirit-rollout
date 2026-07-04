@@ -154,10 +154,12 @@
     .slide{ display:flex !important; min-height:100vh; overflow:visible !important; padding-top:38px; padding-bottom:38px; page-break-after:always; break-after:page; }
     .slide:last-of-type{ page-break-after:auto; break-after:auto; }
     .figframe{ max-height:60vh; }
+    .split{ flex-direction:row !important; }
+    .split .figframe{ aspect-ratio:16/10 !important; max-height:44vh; }
     .bgimg,.scrim{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
     *{ text-shadow:none !important; }
   }
-  @media (max-width:820px){
+  @media screen and (max-width:820px){
     .split{ flex-direction:column; } .panels{ flex-direction:column; } .habitgrid{ grid-template-columns:1fr; }
     .foot{ display:none; } .phases{ flex-wrap:wrap; } .phase{ min-width:44%; }
   }
